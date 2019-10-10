@@ -10,14 +10,23 @@ import java.util.Scanner;
 
 public class Juego {
     int [][] tablero =new int[3][3];
+    private static Juego instancia;
 
-    public Juego() {
+
+    private Juego() {
         for (int i = 0; i < tablero.length ; i++) {
             for (int j = 0; j < tablero[0].length; j++) {
                 this.tablero[i][j]=0;
             }
         }
     }
+    
+        public static Juego getInstancia() {
+		if(instancia == null) {
+			instancia = new Juego();
+		}
+		return instancia;
+	}
     
 private boolean marcar(int [] posicion,int jugador){
      boolean resultado = false;
@@ -155,6 +164,8 @@ public void jugar(){
           jugada =asignarPosicion(posicion);
           if(marcar(jugada, jugador)){
               if(finPartida(jugador)){
+                  limpiarConsola();
+                  imprimirTablero();
                   System.out.println("Jugador "+jugador+" gano la partida");
                   finPartida =true;
               }
@@ -165,13 +176,14 @@ public void jugar(){
                   
           }
           else{
-              System.out.println("Casilla Ocupada,perdio su turno!!!");
+              System.out.println("Casilla Ocupada,jugador "+jugador+" perdio su turno!!!");
               numjugada++;
           } 
              
           
           }
-          numjugada++;
+          
+          
       } 
       else{
           jugador=2;
@@ -189,6 +201,8 @@ public void jugar(){
           jugada =asignarPosicion(posicion);
           if(marcar(jugada, jugador)){
               if(finPartida(jugador)){
+                  limpiarConsola();
+                  imprimirTablero();
                   System.out.println("Jugador "+jugador+" gano la partida");
                   finPartida =true;
               }
@@ -199,20 +213,22 @@ public void jugar(){
                   
           }
           else{
-              System.out.println("Casilla Ocupada,perdio su turno!!!");
+              System.out.println("Casilla Ocupada,jugador "+jugador+" perdio su turno!!!");
               numjugada++;
           } 
              
           
           }
-          numjugada++;
+          
       } 
     } while (numjugada<=9 && finPartida ==false);
-    
+    if(numjugada==9)
+        System.out.println("EMPATE!!!");
+        
 }
 
     private void limpiarConsola(){
-         for (int i = 0; i < 10; i++) {
+         for (int i = 0; i < 7; i++) {
             System.out.println("");
         }
     }

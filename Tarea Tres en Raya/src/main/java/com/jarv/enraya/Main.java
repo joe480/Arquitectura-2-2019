@@ -11,8 +11,9 @@ package com.jarv.enraya;
  */
 public class Main {
     public static void main(String[] args) {
-       Juego jg =new Juego();
+       Juego jg =Juego.getInstancia();
        jg.jugar();
+       
     }
   
 }
